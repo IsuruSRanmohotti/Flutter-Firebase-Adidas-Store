@@ -1,11 +1,6 @@
 import 'package:adidas/controllers/auth_controller.dart';
-import 'package:adidas/screens/auth_screen/signin_page.dart';
-import 'package:adidas/screens/home_screen/HomePage/homepage.dart';
-import 'package:adidas/utils/custom_navigators.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

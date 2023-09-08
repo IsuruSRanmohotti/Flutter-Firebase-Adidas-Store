@@ -47,5 +47,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<String>For Pick Image from gallery</String>
+	<key>NSCameraUsageDescription</key>
+	<String>For Capture the image</String>
+	<Key>NSMicrophoneUsageDescription</Key>
+	<String>For Record Video</String>
+	</dict>
 </plist>

@@ -8,7 +8,6 @@ import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/auth_screen/signin_page.dart';
-import '../screens/home_screen/HomePage/homepage.dart';
 import '../utils/custom_navigators.dart';
 
 class AuthController {
@@ -121,9 +120,9 @@ class AuthController {
     }
   }
 
-  Future<void> updateUser(String uid, String name) async {
+  Future<void> updateUser(Map<String,dynamic> data , String uid) async {
     try {
-      await users.doc(uid).update({"name": name});
+      await users.doc(uid).update(data);
       Logger().f("User Updated");
     } catch (e) {
       Logger().e(e);

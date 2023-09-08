@@ -1,6 +1,4 @@
 import 'package:adidas/components/custom_text/custom_poppins_text.dart';
-import 'package:adidas/models/sneaker_model.dart';
-import 'package:adidas/utils/demo_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<SneakerModel> sneakers = DemoData.sneakers;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TopCategories(),
                 const SizedBox(height: 5),
-                ProductGrid(sneakers: sneakers)
+                const ProductGrid()
               ],
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:adidas/providers/admin_provider.dart';
 import 'package:adidas/providers/auth_provider.dart';
 import 'package:adidas/providers/main_screen_provider.dart';
 import 'package:adidas/providers/profile_provider.dart';
@@ -30,6 +31,9 @@ Future<void> main() async {
         create: (context) => MainScreenProvider(),
       ),ChangeNotifierProvider(
         create: (context) => ProfileProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => AdminProvider(),
       )
     ],
     child: const MyApp(),

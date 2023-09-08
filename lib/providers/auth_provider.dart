@@ -15,9 +15,14 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserModel(UserModel model , BuildContext context , String name) {
+  void setUserModel(UserModel model, BuildContext context, String name) {
     _userModel = model;
-    Provider.of<ProfileProvider>(context,listen :false).setUserName(name);
+    Provider.of<ProfileProvider>(context, listen: false).setUserName(name);
+    notifyListeners();
+  }
+
+  void updateImage(String url) {
+    _userModel!.image = url;
     notifyListeners();
   }
 }
