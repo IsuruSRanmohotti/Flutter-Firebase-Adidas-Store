@@ -33,7 +33,9 @@ class AuthController {
                     image:
                         "https://i.pinimg.com/236x/47/5a/86/475a86177aeedacf8dc7f5e2b4eff61f.jpg",
                     name: "",
-                    uid: user.uid),
+                    uid: user.uid , 
+                    favorite: []
+                    ),
                 context,
                 "");
             CustomNavigators.goTo(context, const MainScreen());
@@ -59,7 +61,9 @@ class AuthController {
             image:
                 "https://i.pinimg.com/236x/47/5a/86/475a86177aeedacf8dc7f5e2b4eff61f.jpg",
             name: name,
-            uid: credential.user!.uid);
+            uid: credential.user!.uid , 
+            favorite: []
+            );
         addUserData(model);
       }
 
@@ -120,10 +124,20 @@ class AuthController {
     }
   }
 
-  Future<void> updateUser(Map<String,dynamic> data , String uid) async {
+  Future<void> updateUser(Map<String, dynamic> data, String uid) async {
     try {
       await users.doc(uid).update(data);
       Logger().f("User Updated");
+    } catch (e) {
+      Logger().e(e);
+    }
+  }
+
+  Future<void> updateFavorite(String uid , List<String> items) async {
+    try {
+      await users.doc(uid).update({
+        "favorite": items
+      });
     } catch (e) {
       Logger().e(e);
     }

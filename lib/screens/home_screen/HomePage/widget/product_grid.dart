@@ -1,6 +1,9 @@
 import 'package:adidas/components/custom_text/custom_poppins_text.dart';
 import 'package:adidas/controllers/product_controller.dart';
+import 'package:adidas/providers/auth_provider.dart';
+import 'package:adidas/screens/home_screen/product_view/product_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../models/sneaker_model.dart';
@@ -13,7 +16,7 @@ class ProductGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ProductController().fetchProducts(),
+        future: ProductController().fetchProducts(context),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Text("Has Error");
@@ -49,40 +52,68 @@ class ProductGrid extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
             itemBuilder: (context, index) {
-              return Container(
-                height: 100,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(sneakers[index].image),
-                        fit: BoxFit.cover),
-                    color: Colors.grey.shade400,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductView(
+                                model: sneakers[index],
+                              )));
+                },
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(sneakers[index].image),
+                          fit: BoxFit.cover),
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(15)),
+                  child:
+                      Consumer<AuthProvider>(builder: (context, value, child) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Stack(
                         children: [
-                          Chip(
-                            label: Text("LKR ${sneakers[index].price}0"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Chip(
+                                label: Text("LKR ${sneakers[index].price}0"),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (value.favID
+                                      .contains(sneakers[index].id)) {
+                                    value.removeFromFav(sneakers[index]);
+                                  } else {
+                                    value.addToFav(sneakers[index]);
+                                  }
+                                },
+                                child: Icon(
+                                  value.favID.contains(sneakers[index].id)
+                                      ? Icons.favorite
+                                      : Icons.favorite_outline_rounded,
+                                  color:
+                                      value.favID.contains(sneakers[index].id)
+                                          ? Colors.red
+                                          : Colors.grey,
+                                ),
+                              )
+                            ],
                           ),
-                          const Icon(
-                            Icons.favorite_outline_rounded,
-                            color: Colors.grey,
+                          Positioned(
+                            bottom: 5,
+                            child: CustomPoppinsText(
+                              text: sneakers[index].title,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
                           )
                         ],
                       ),
-                      Positioned(
-                        bottom: 5,
-                        child: CustomPoppinsText(
-                          text: sneakers[index].title,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    ],
-                  ),
+                    );
+                  }),
                 ),
               );
             },

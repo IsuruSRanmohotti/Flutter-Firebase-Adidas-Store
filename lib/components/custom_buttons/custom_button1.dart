@@ -24,8 +24,7 @@ class CustomButton1 extends StatelessWidget {
           width: size.width * 0.7,
           height: 45,
           decoration: BoxDecoration(
-              color: Colors.orange.shade800,
-              borderRadius: BorderRadius.circular(15)),
+              color: bgColor, borderRadius: BorderRadius.circular(15)),
           child: Center(
             child: CustomPoppinsText(
               text: text,

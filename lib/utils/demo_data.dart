@@ -114,6 +114,6 @@ class DemoData {
     "https://hips.hearstapps.com/esq.h-cdn.co/assets/17/23/3200x1600/landscape-1496953066-weekendies-lede.jpg?resize=1200:*",
     "https://thumbs.dreamstime.com/b/child-walking-park-soles-sneakers-man-stops-girl-s-girlfriend-hot-girls-nature-leaves-yellow-autumn-bright-colors-104751142.jpg",
     "https://esq.h-cdn.co/assets/16/25/1600x800/landscape-1466607568-100-paper-sneakers-jordan.jpg",
-    "https://www.artforum.com/uploads/upload.001/id30679/featured00_landscape.jpg",
+    "https://c0.wallpaperflare.com/preview/186/124/897/red-and-white-air-jordan-1-shoe-on-concrete-floor.jpg",
   ];
 }

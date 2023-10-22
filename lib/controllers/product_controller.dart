@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/auth_provider.dart';
+
 class ProductController {
   CollectionReference products =
       FirebaseFirestore.instance.collection("Products");
@@ -16,7 +18,7 @@ class ProductController {
     });
   }
 
-  Future<List<SneakerModel>> fetchProducts() async {
+  Future<List<SneakerModel>> fetchProducts(context) async {
     QuerySnapshot snapshot = await products.get();
     if (snapshot.docs.isEmpty) {
       Logger().e("Cant fetch data");
@@ -28,6 +30,10 @@ class ProductController {
             SneakerModel.fromJson(element.data() as Map<String, dynamic>);
         sneakers.add(sneaker);
       }
+      Provider.of<AuthProvider>(context, listen: false)
+          .filterFavoriteItems(sneakers);
+      Provider.of<AdminProvider>(context, listen: false)
+          .setAllProducts(sneakers);
       return sneakers;
     }
   }
