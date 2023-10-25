@@ -1,6 +1,7 @@
 import 'package:adidas/components/custom_buttons/custom_button1.dart';
 import 'package:adidas/components/custom_text/custom_poppins_text.dart';
 import 'package:adidas/providers/cart_provider.dart';
+import 'package:adidas/providers/payment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -162,7 +163,12 @@ class _CartScreenState extends State<CartScreen> {
                             size: MediaQuery.sizeOf(context),
                             text: "Buy Now",
                             bgColor: Colors.orange,
-                            ontap: () {}),
+                            ontap: () {
+                              Provider.of<PaymentProvider>(context,
+                                      listen: false)
+                                  .getPayment(
+                                      "${value.calculateTotal().replaceAll(".", "")}0");
+                            }),
                       )
                     ],
                   ),
